@@ -1,0 +1,40 @@
+.footer-container {
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 150px;
+  width: 50px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+}
+
+.social-icons {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.github-icon {
+  font-size: 1.6rem;
+  color: #ecdede;
+}
+
+.linkedin-icon {
+  font-size: 1.6rem;
+  color: #ecdede;
+}
+
+@media screen and (max-width: 576px) {
+  .footer-container {
+    height: 130px;
+    width: 40px;
+  }
+
+  .github-icon,
+  .linkedin-icon {
+    font-size: 1.3rem;
+  }
+}

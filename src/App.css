@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -5,5 +7,16 @@
 }
 
 body {
-  background-color: #3335;
+  font-family: "Roboto Mono", monospace;
+}
+
+.app {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  background-image: url("./assets/sunset-675847.jpg");
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: bottom;
+  background-size: cover;
 }

@@ -1,0 +1,5 @@
+.form-agregar-tarea:focus {
+  border-color: #915b2c !important;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
+    0 0 8px rgba(219, 161, 92, 0.5) !important;
+}

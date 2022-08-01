@@ -13,7 +13,7 @@ const TareaCard = ({ item, id, editarTareaBtn, task, setTask }) => {
   return (
     <div>
       <div className="card mb-3">
-        <div className="card-body d-flex justify-content-between align-items-center">
+        <div className="card-body d-flex justify-content-between align-items-center body-tareas">
           <span>{item}</span>
 
           <div>
@@ -21,11 +21,14 @@ const TareaCard = ({ item, id, editarTareaBtn, task, setTask }) => {
               onClick={() => borrarTarea(id)}
               className="btn btn-secondary btn-sm me-2"
             >
-              X
+              <i className="bi bi-trash3-fill"></i>
             </button>
 
-            <button onClick={editarTareaBtn} className="btn btn-warning btn-sm">
-              Editar
+            <button
+              onClick={editarTareaBtn}
+              className="btn button-editar btn-sm"
+            >
+              <i className="bi bi-pencil-fill"></i>
             </button>
           </div>
         </div>

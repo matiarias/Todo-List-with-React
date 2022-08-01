@@ -4,7 +4,10 @@ import TareaForm from "../tarea form/TareaForm";
 import TareaCard from "../tarea card/TareaCard";
 import EditarTareaForm from "../editar tarea form/EditarTareaForm";
 
+import { Toaster, toast } from "react-hot-toast";
+
 import "../todo list home/todoListHome.css";
+import Footer from "../footer/Footer.jsx";
 
 const TodoListHome = () => {
   const [inputValue, setInputValue] = useState("");
@@ -33,6 +36,19 @@ const TodoListHome = () => {
 
   // ----------------- Función submit del formulario que agrega las tareas ------------------
 
+  const toastAgregarTarea = () => {
+    toast.success("Tareas Agregada!", {
+      position: "bottom-center",
+      duration: 4000,
+      reverseOrder: "true",
+      style: {
+        borderRadius: "10px",
+        background: "#f3d6b3 ",
+        color: "#000",
+      },
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -40,6 +56,7 @@ const TodoListHome = () => {
       setTask([inputValue.trim(), ...task]);
       setInputValue("");
       setValidacion(true);
+      toastAgregarTarea();
     } else {
       setValidacion(false);
     }
@@ -49,6 +66,21 @@ const TodoListHome = () => {
 
   const borrarTodo = () => {
     setTask([]);
+    toast.error("Tareas Eliminadas!", {
+      position: "top-right",
+      duration: 4000,
+      reverseOrder: "true",
+      iconTheme: {
+        primary: "#9d6f4f",
+        secondary: "#FFFAEE",
+      },
+
+      style: {
+        borderRadius: "10px",
+        background: "#555",
+        color: "#fff",
+      },
+    });
   };
 
   // -------------------- Funcion botón para abrir el formulario para editar tareas ----------------------
@@ -61,70 +93,81 @@ const TodoListHome = () => {
 
   return (
     <>
-      <div className="container">
-        <div className="row mt-4">
-          <div className="col-12 col-md-6 offset-md-3 mb-1 d-flex justify-content-between align-items-center">
-            <h3 className="text-center">Lista de tareas</h3>
-            <button onClick={borrarTodo} className="btn btn-dark btn-sm">
-              Borrar Todo
-            </button>
-          </div>
-        </div>
-
-        {/* -------------------------- Tarea Form ----------------------- */}
-
-        <div className="row mt-2">
+      <div className="container container-principal">
+        <div className="row">
           <div className="col-12 col-md-6 offset-md-3">
-            <div className="d-flex">
-              <div className="w-100">
-                <TareaForm
-                  handleSubmit={handleSubmit}
-                  inputValue={inputValue}
-                  handleChange={handleChange}
-                />
-              </div>
+            <div className="card body-todo-list mt-5">
+              <div className="card-body">
+                {/* ---------------------- Title card --------------------- */}
 
-              <div className="ms-3">
-                <button onClick={handleSubmit} className="btn btn-secondary">
-                  Agregar
-                </button>
+                <div className="d-flex justify-content-between align-items-center mb-3">
+                  <h3 className="title-todo-list">Lista de tareas</h3>
+                  <button
+                    onClick={borrarTodo}
+                    className="btn btn-sm button-borrar-todo"
+                  >
+                    Borrar Todo
+                  </button>
+                </div>
+
+                {/* -------------------------- Tarea Form ----------------------- */}
+
+                <div className="d-flex justify-content-between align-items-center">
+                  <div className="w-100">
+                    <TareaForm
+                      handleSubmit={handleSubmit}
+                      inputValue={inputValue}
+                      handleChange={handleChange}
+                    />
+                  </div>
+
+                  <div className="ms-3">
+                    <button
+                      onClick={handleSubmit}
+                      className="btn btn-sm button-agregar-tarea"
+                    >
+                      Agregar
+                    </button>
+                  </div>
+                </div>
+
+                {!validacion && (
+                  <div className="alert alert-validacion mt-3" role="alert">
+                    Escribe tu tarea por favor!
+                  </div>
+                )}
+                <p className="contador-tareas mt-2">
+                  Tareas Pendientes: {task.length}
+                </p>
+
+                {/* ------------------------- Tarea Card ----------------------- */}
+
+                {!modoEdit ? (
+                  task.map((item, index) => (
+                    <TareaCard
+                      key={index}
+                      item={item}
+                      id={index}
+                      editarTareaBtn={editarTareaBtn}
+                      task={task}
+                      setTask={setTask}
+                    />
+                  ))
+                ) : (
+                  <EditarTareaForm
+                    setModoEdit={setModoEdit}
+                    task={task}
+                    setTask={setTask}
+                  />
+                )}
               </div>
             </div>
-
-            {!validacion && (
-              <div className="alert alert-danger mt-3" role="alert">
-                Escribe tu tarea por favor!
-              </div>
-            )}
-            <p className="mt-2">Tareas Pendientes: {task.length}</p>
           </div>
         </div>
-
-        {/* ------------------------- Tarea Card ----------------------- */}
-
-        <div className="row">
-          <div className="col-12 col-md-6 offset-md-3 mt-3">
-            {!modoEdit ? (
-              task.map((item, index) => (
-                <TareaCard
-                  key={index}
-                  item={item}
-                  id={index}
-                  editarTareaBtn={editarTareaBtn}
-                  task={task}
-                  setTask={setTask}
-                />
-              ))
-            ) : (
-              <EditarTareaForm
-                setModoEdit={setModoEdit}
-                task={task}
-                setTask={setTask}
-              />
-            )}
-          </div>
-        </div>
+        <Footer />
       </div>
+
+      <Toaster />
     </>
   );
 };

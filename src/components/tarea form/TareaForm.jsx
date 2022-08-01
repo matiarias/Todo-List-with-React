@@ -8,7 +8,7 @@ const TareaForm = ({ handleSubmit, handleChange, inputValue }) => {
         <input
           maxLength="25"
           type="text"
-          className="form-control"
+          className="form-control form-agregar-tarea"
           placeholder="Escribe la tarea"
           value={inputValue}
           onChange={handleChange}
