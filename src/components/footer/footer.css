@@ -28,13 +28,8 @@
 }
 
 @media screen and (max-width: 576px) {
-  .footer-container {
-    height: 130px;
-    width: 40px;
-  }
-
   .github-icon,
   .linkedin-icon {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
   }
 }
