@@ -53,7 +53,7 @@ const EditarTareaForm = ({ task, setTask, setModoEdit }) => {
             onClick={closeFormEditar}
             className="btn btn-sm text-end button-close-editar"
           >
-            <i className="bi bi-x-octagon icon-close-edit"></i>
+            <i class="bi bi-x-lg icon-close-edit"></i>
           </button>
           <div className="d-flex">
             <div className="w-100 me-3">
