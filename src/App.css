@@ -12,7 +12,7 @@ body {
 
 .app__body {
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
   position: relative;
   background-image: url("./assets/sunset-675847.jpg");
   background-repeat: no-repeat;

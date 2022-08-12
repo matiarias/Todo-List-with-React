@@ -64,8 +64,7 @@ const TodoListHome = () => {
 
   // ---------------------- Función botón Borrar todas las tareas --------------------------
 
-  const borrarTodo = () => {
-    setTask([]);
+  const toastBorrarTodo = () => {
     toast.error("Tareas Eliminadas!", {
       position: "top-right",
       duration: 4000,
@@ -81,6 +80,11 @@ const TodoListHome = () => {
         color: "#fff",
       },
     });
+  };
+
+  const borrarTodo = () => {
+    setTask([]);
+    toastBorrarTodo();
   };
 
   // -------------------- Funcion botón para abrir el formulario para editar tareas ----------------------

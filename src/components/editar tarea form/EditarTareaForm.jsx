@@ -6,9 +6,9 @@ import { Toaster, toast } from "react-hot-toast";
 const EditarTareaForm = ({ task, setTask, setModoEdit }) => {
   const [editInput, setEditInput] = useState("");
 
-  const handleChangeEdit = ({ target }) => {
+  const handleChangeEditInput = ({ target }) => {
     setEditInput(target.value);
-    console.log(target.value);
+    // console.log(target.value);
   };
 
   const editTask = () => {
@@ -44,6 +44,7 @@ const EditarTareaForm = ({ task, setTask, setModoEdit }) => {
   const closeFormEditar = () => {
     setModoEdit(false);
   };
+
   return (
     <>
       <div className="card">
@@ -53,7 +54,7 @@ const EditarTareaForm = ({ task, setTask, setModoEdit }) => {
             onClick={closeFormEditar}
             className="btn btn-sm text-end button-close-editar"
           >
-            <i class="bi bi-x-lg icon-close-edit"></i>
+            <i className="bi bi-x-lg icon-close-edit"></i>
           </button>
           <div className="d-flex">
             <div className="w-100 me-3">
@@ -63,7 +64,7 @@ const EditarTareaForm = ({ task, setTask, setModoEdit }) => {
                   maxLength="25"
                   className="form-control form-editar-tarea"
                   value={editInput}
-                  onChange={handleChangeEdit}
+                  onChange={handleChangeEditInput}
                   autoFocus
                 />
               </form>
