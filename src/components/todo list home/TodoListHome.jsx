@@ -39,7 +39,7 @@ const TodoListHome = () => {
   const toastAgregarTarea = () => {
     toast.success("Tareas Agregada!", {
       position: "bottom-center",
-      duration: 4000,
+      duration: 3000,
       reverseOrder: "true",
       style: {
         borderRadius: "10px",
@@ -67,7 +67,7 @@ const TodoListHome = () => {
   const toastBorrarTodo = () => {
     toast.error("Tareas Eliminadas!", {
       position: "top-right",
-      duration: 4000,
+      duration: 2000,
       reverseOrder: "true",
       iconTheme: {
         primary: "#9d6f4f",

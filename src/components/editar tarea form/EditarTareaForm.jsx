@@ -11,10 +11,6 @@ const EditarTareaForm = ({ task, setTask, setModoEdit }) => {
     // console.log(target.value);
   };
 
-  const editTask = () => {
-    console.log(task);
-  };
-
   const toastTareaEditada = () => {
     toast.success("Tarea editada!", {
       position: "top-center",
@@ -31,6 +27,10 @@ const EditarTareaForm = ({ task, setTask, setModoEdit }) => {
         color: "#fff",
       },
     });
+  };
+
+  const editTask = () => {
+    console.log(task);
   };
 
   const submitEdit = (e) => {
