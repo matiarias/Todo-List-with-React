@@ -1,14 +1,16 @@
 import React from "react";
 import "../tarea card/tareaCard.css";
 
-const TareaCard = ({ item, id, editarTareaBtn, task, setTask }) => {
-  // ----------------- función para borrar tareas --------------------------
+const TareaCard = ({ item, id, tareas, setTareas, abrirFormEditTarea }) => {
+  // ------------------------------- función para borrar tareas ------------------------------------
 
   const borrarTarea = (indice) => {
-    const tareasPendientes = [...task];
+    const tareasPendientes = [...tareas];
     tareasPendientes.splice(indice, 1);
-    setTask(tareasPendientes);
+    setTareas(tareasPendientes);
   };
+
+  // ------------------------------------------------------------------------------------------------
 
   return (
     <div>
@@ -25,7 +27,7 @@ const TareaCard = ({ item, id, editarTareaBtn, task, setTask }) => {
             </button>
 
             <button
-              onClick={editarTareaBtn}
+              onClick={abrirFormEditTarea}
               className="btn button-editar btn-sm"
             >
               <i className="bi bi-pencil-fill"></i>

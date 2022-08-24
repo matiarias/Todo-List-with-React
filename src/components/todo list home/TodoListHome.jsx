@@ -3,43 +3,44 @@ import { useEffect } from "react";
 import TareaForm from "../tarea form/TareaForm";
 import TareaCard from "../tarea card/TareaCard";
 import EditarTareaForm from "../editar tarea form/EditarTareaForm";
+import "../todo list home/todoListHome.css";
 
 import { Toaster, toast } from "react-hot-toast";
-
-import "../todo list home/todoListHome.css";
 import Footer from "../footer/Footer.jsx";
 
 const TodoListHome = () => {
-  const [inputValue, setInputValue] = useState("");
-  const [task, setTask] = useState([]);
-  const [validacion, setValidacion] = useState(true);
-  const [modoEdit, setModoEdit] = useState(false);
-  // const [editInput, setEditInput] = useState("");
+  const [inputTarea, setInputTarea] = useState("");
 
-  // --- useEffect para traer los datos con local storage y luego agregar cada tarea en el arreglo -----
+  const [tareas, setTareas] = useState([]);
+
+  const [validacion, setValidacion] = useState(false);
+
+  const [modoEditTarea, setModoEditTarea] = useState(false);
+
+  // -- useEffect para traer los datos con local storage y luego agregar cada tarea en el local storage --
 
   useEffect(() => {
     if (localStorage.getItem("tareas")) {
-      setTask(JSON.parse(localStorage.getItem("tareas")));
+      setTareas(JSON.parse(localStorage.getItem("tareas")));
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("tareas", JSON.stringify(task));
-  }, [task]);
+    localStorage.setItem("tareas", JSON.stringify(tareas));
+  }, [tareas]);
 
-  // ----------------------- Función para obtener el value del input principal -------------------
+  // ----------------------- Función para obtener el value del input tarea -------------------
 
   const handleChange = ({ target }) => {
-    setInputValue(target.value);
+    setInputTarea(target.value);
   };
 
   // ----------------- Función submit del formulario que agrega las tareas ------------------
 
-  const toastAgregarTarea = () => {
+  const toastTareaAgregada = () => {
     toast.success("Tareas Agregada!", {
       position: "bottom-center",
-      duration: 3000,
+      duration: 2000,
       reverseOrder: "true",
       style: {
         borderRadius: "10px",
@@ -52,13 +53,13 @@ const TodoListHome = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (inputValue.trim() !== "") {
-      setTask([inputValue.trim(), ...task]);
-      setInputValue("");
-      setValidacion(true);
-      toastAgregarTarea();
-    } else {
+    if (inputTarea.trim() !== "") {
+      setTareas([inputTarea.trim(), ...tareas]);
+      setInputTarea("");
       setValidacion(false);
+      toastTareaAgregada();
+    } else {
+      setValidacion(true);
     }
   };
 
@@ -83,17 +84,17 @@ const TodoListHome = () => {
   };
 
   const borrarTodo = () => {
-    setTask([]);
+    setTareas([]);
     toastBorrarTodo();
   };
 
-  // -------------------- Funcion botón para abrir el formulario para editar tareas ----------------------
+  // ------------------------------- función modo editar tarea ------------------------------------
 
-  const editarTareaBtn = () => {
-    setModoEdit(true);
+  const abrirFormEditTarea = () => {
+    setModoEditTarea(true);
   };
 
-  // --------------------------------------------------------------------------------------------
+  // -------------------------------------------------------------------------------------------------
 
   return (
     <>
@@ -120,7 +121,7 @@ const TodoListHome = () => {
                   <div className="w-100">
                     <TareaForm
                       handleSubmit={handleSubmit}
-                      inputValue={inputValue}
+                      inputTarea={inputTarea}
                       handleChange={handleChange}
                     />
                   </div>
@@ -128,6 +129,7 @@ const TodoListHome = () => {
                   <div className="ms-3">
                     <button
                       onClick={handleSubmit}
+                      type="submit"
                       className="btn btn-sm button-agregar-tarea"
                     >
                       Agregar
@@ -135,34 +137,34 @@ const TodoListHome = () => {
                   </div>
                 </div>
 
-                {!validacion && (
+                {validacion && (
                   <div className="alert alert-validacion mt-3" role="alert">
                     Escribe tu tarea por favor!
                   </div>
                 )}
                 <p className="contador-tareas mt-2">
-                  Tareas Pendientes: {task.length}
+                  Tareas Pendientes: {tareas.length}
                 </p>
 
                 {/* ------------------------- Tarea Card ----------------------- */}
 
-                {!modoEdit ? (
-                  task.map((item, index) => (
+                {modoEditTarea ? (
+                  <EditarTareaForm
+                    tareas={tareas}
+                    setTareas={setTareas}
+                    setModoEditTarea={setModoEditTarea}
+                  />
+                ) : (
+                  tareas.map((item, index) => (
                     <TareaCard
                       key={index}
                       item={item}
                       id={index}
-                      editarTareaBtn={editarTareaBtn}
-                      task={task}
-                      setTask={setTask}
+                      tareas={tareas}
+                      setTareas={setTareas}
+                      abrirFormEditTarea={abrirFormEditTarea}
                     />
                   ))
-                ) : (
-                  <EditarTareaForm
-                    setModoEdit={setModoEdit}
-                    task={task}
-                    setTask={setTask}
-                  />
                 )}
               </div>
             </div>

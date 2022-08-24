@@ -3,13 +3,17 @@ import { useState } from "react";
 import "../editar tarea form/editarTareaForm.css";
 import { Toaster, toast } from "react-hot-toast";
 
-const EditarTareaForm = ({ task, setTask, setModoEdit }) => {
-  const [editInput, setEditInput] = useState("");
+const EditarTareaForm = ({ tareas, setTareas, setModoEditTarea }) => {
+  const [inputEditTarea, setInputEditTarea] = useState("");
 
-  const handleChangeEditInput = ({ target }) => {
-    setEditInput(target.value);
-    // console.log(target.value);
+  // ----------------- funcion para manejar el input para editar tarea ------------------------------
+
+  const handleChangeEditTarea = ({ target }) => {
+    setInputEditTarea(target.value);
+    // console.log(inputEditTarea);
   };
+
+  // ------------------------ alerta react toast para la tarea editada -----------------------------
 
   const toastTareaEditada = () => {
     toast.success("Tarea editada!", {
@@ -29,21 +33,21 @@ const EditarTareaForm = ({ task, setTask, setModoEdit }) => {
     });
   };
 
-  const editTask = () => {
-    console.log(task);
-  };
+  // ---------------------------- función para agregar la tarea editada -----------------------------
 
-  const submitEdit = (e) => {
+  const handleSubmitEditTarea = (e) => {
     e.preventDefault();
-    editTask();
-    setEditInput("");
-    setModoEdit(false);
     toastTareaEditada();
+    console.log(tareas);
   };
 
-  const closeFormEditar = () => {
-    setModoEdit(false);
+  // ------------------------- función para cerrar el modo editar tarea ------------------------------
+
+  const cerrarModoEditar = () => {
+    setModoEditTarea(false);
   };
+
+  // -------------------------------------------------------------------------------------------------
 
   return (
     <>
@@ -51,27 +55,28 @@ const EditarTareaForm = ({ task, setTask, setModoEdit }) => {
         <div className="card-body card-editar">
           <h4 className="text-center title-editar-tarea">Edita tu tarea</h4>
           <button
-            onClick={closeFormEditar}
+            onClick={cerrarModoEditar}
             className="btn btn-sm text-end button-close-editar"
           >
             <i className="bi bi-x-lg icon-close-edit"></i>
           </button>
           <div className="d-flex">
             <div className="w-100 me-3">
-              <form onSubmit={submitEdit}>
+              <form onSubmit={handleSubmitEditTarea}>
                 <input
                   type="text"
                   maxLength="25"
                   className="form-control form-editar-tarea"
-                  value={editInput}
-                  onChange={handleChangeEditInput}
+                  value={inputEditTarea}
+                  onChange={handleChangeEditTarea}
                   autoFocus
                 />
               </form>
             </div>
 
             <button
-              onClick={submitEdit}
+              onClick={handleSubmitEditTarea}
+              type="submit"
               className="btn - button-guardar-tarea-editada btn-sm"
             >
               Guardar
