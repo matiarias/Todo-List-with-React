@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import "../tarea card/tareaCard.css";
 
 const TareaCard = ({ item, id, tareas, setTareas, abrirFormEditTarea }) => {
