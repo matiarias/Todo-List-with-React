@@ -16,6 +16,7 @@ const TodoListHome = () => {
   const [validacion, setValidacion] = useState(false);
 
   const [modoEditTarea, setModoEditTarea] = useState(false);
+  const [itemEdit,setItemEdit] = useState(null)
 
   // -- useEffect para traer los datos con local storage y luego agregar cada tarea en el local storage --
 
@@ -90,7 +91,11 @@ const TodoListHome = () => {
 
   // ------------------------------- función modo editar tarea ------------------------------------
 
-  const abrirFormEditTarea = () => {
+  const abrirFormEditTarea = (item,tareas,id) => {
+    setItemEdit({
+      tarea:item,
+      id:id
+    })
     setModoEditTarea(true);
   };
 
@@ -148,9 +153,11 @@ const TodoListHome = () => {
 
                 {/* ------------------------- Tarea Card ----------------------- */}
 
-                {modoEditTarea ? (
+                {modoEditTarea && Boolean(itemEdit) ? (
                   <EditarTareaForm
                     tareas={tareas}
+                    itemEdit={itemEdit}
+                  
                     setTareas={setTareas}
                     setModoEditTarea={setModoEditTarea}
                   />
