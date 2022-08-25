@@ -3,13 +3,18 @@ import { useState } from "react";
 import "../editar tarea form/editarTareaForm.css";
 import { Toaster, toast } from "react-hot-toast";
 
-const EditarTareaForm = ({ tareas, setTareas, setModoEditTarea }) => {
-  const [inputEditTarea, setInputEditTarea] = useState("");
+const EditarTareaForm = ({ itemEdit,tareas, setTareas, setModoEditTarea }) => {
+  const [inputEditTarea, setInputEditTarea] = useState({...itemEdit});
 
   // ----------------- funcion para manejar el input para editar tarea ------------------------------
 
   const handleChangeEditTarea = ({ target }) => {
-    setInputEditTarea(target.value);
+    setInputEditTarea(prev=>{
+      return {
+        ...prev,
+        tarea:target.value
+      }
+    });
     // console.log(inputEditTarea);
   };
 
@@ -38,7 +43,14 @@ const EditarTareaForm = ({ tareas, setTareas, setModoEditTarea }) => {
   const handleSubmitEditTarea = (e) => {
     e.preventDefault();
     toastTareaEditada();
+    setTareas(prev=>{
+
+      prev[inputEditTarea.id]=inputEditTarea.tarea
+
+      return prev
+    })
     console.log(tareas);
+    setModoEditTarea(false)
   };
 
   // ------------------------- función para cerrar el modo editar tarea ------------------------------
@@ -67,7 +79,7 @@ const EditarTareaForm = ({ tareas, setTareas, setModoEditTarea }) => {
                   type="text"
                   maxLength="25"
                   className="form-control form-editar-tarea"
-                  value={inputEditTarea}
+                  value={inputEditTarea.tarea}
                   onChange={handleChangeEditTarea}
                   autoFocus
                 />
