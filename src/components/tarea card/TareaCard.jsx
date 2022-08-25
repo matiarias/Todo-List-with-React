@@ -28,7 +28,7 @@ const TareaCard = ({ item, id, tareas, setTareas, abrirFormEditTarea }) => {
             </button>
 
             <button
-              onClick={abrirFormEditTarea}
+              onClick={ ()=>abrirFormEditTarea(item,tareas,id)}
               className="btn button-editar btn-sm"
             >
               <i className="bi bi-pencil-fill"></i>
