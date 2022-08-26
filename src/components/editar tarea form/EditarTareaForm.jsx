@@ -1,19 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import "../editar tarea form/editarTareaForm.css";
 import { Toaster, toast } from "react-hot-toast";
 
-const EditarTareaForm = ({ itemEdit,tareas, setTareas, setModoEditTarea }) => {
-  const [inputEditTarea, setInputEditTarea] = useState({...itemEdit});
+const EditarTareaForm = ({ itemEdit, tareas, setTareas, setModoEditTarea }) => {
+  const [inputEditTarea, setInputEditTarea] = useState({ ...itemEdit });
 
   // ----------------- funcion para manejar el input para editar tarea ------------------------------
 
   const handleChangeEditTarea = ({ target }) => {
-    setInputEditTarea(prev=>{
+    setInputEditTarea((prev) => {
       return {
         ...prev,
-        tarea:target.value
-      }
+        tarea: target.value,
+      };
     });
     // console.log(inputEditTarea);
   };
@@ -43,14 +43,13 @@ const EditarTareaForm = ({ itemEdit,tareas, setTareas, setModoEditTarea }) => {
   const handleSubmitEditTarea = (e) => {
     e.preventDefault();
     toastTareaEditada();
-    setTareas(prev=>{
+    setTareas((prev) => {
+      prev[inputEditTarea.id] = inputEditTarea.tarea;
 
-      prev[inputEditTarea.id]=inputEditTarea.tarea
-
-      return prev
-    })
+      return prev;
+    });
     console.log(tareas);
-    setModoEditTarea(false)
+    setModoEditTarea(false);
   };
 
   // ------------------------- función para cerrar el modo editar tarea ------------------------------
