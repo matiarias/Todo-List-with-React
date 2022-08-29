@@ -1,7 +1,22 @@
 # Todo List app
 
-## made with React, JavaScript, Bootstrap.
+Todo list app created with React, Javascript and Bootstrap.
+I used for the first time the React hot toast library to generate different notifications and also used local storage to save the data.
 
-I use for the first time the React hot toast library to generate different notifications and save the data with local storage.
+## Screenshots
 
-Link: [Todo List app](https://todo-list-with-react.vercel.app/)
+![todo-list screenshot](./src//assets//todolist-screenshot.png)
+
+---
+
+## Link
+
+Todo list site: [Todo List app](https://todo-list-with-react.vercel.app/)
+
+## Build with
+
+- React
+- Javascript
+- CSS
+- Bootstrap
+- React hot toast notifications
