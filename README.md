@@ -13,7 +13,7 @@ I used for the first time the React hot toast library to generate different noti
 
 Todo list site: [Todo List app](https://todo-list-with-react.vercel.app/)
 
-## Build with
+## Built with
 
 - React
 - Javascript
